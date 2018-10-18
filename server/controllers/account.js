@@ -1,10 +1,12 @@
 const bcrypt = require('bcrypt');
 var Account = require('../models/account');
+var Profile = require('../models/profile');
+var Permission = require('../models/permission');
 
 const BCRYPT_SALT_ROUNDS = 12;
 
 exports.ping = (req, res) => {
-  res.send('Hello World!');
+  res.send('Hello Account!');
 };
 
 exports.account_register = (req, res) => {
@@ -39,7 +41,15 @@ exports.account_login = (req, res) => {
       } else {
         bcrypt.compare(password, account.password).then((matched) => {
           if (matched) {
-            res.status(200).json({...account._doc, password: undefined})
+            Permission.findOne({accountName: account.username}, (err, permission) => {
+              if (!err && permission) {
+                Profile.find({name: {$in: permission.profileNames}}, (error, profiles) => {
+                  res.status(200).json({...account._doc, password: undefined, profiles})
+                })
+              } else {
+                res.status(200).json({...account._doc, password: undefined})
+              }
+            })
           } else {
             res.status(400).send('Username or password is incorrect')
           }

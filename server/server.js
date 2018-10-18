@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var account = require('./routes/account');
+var profile = require('./routes/profile');
 
 // Set up mongoose connection
 var mongoURI = `mongodb://${process.env.MONGODB_HOST || 'localhost'}:${process.env.MONGODB_PORT || '27017'}/gsg`;
@@ -21,6 +22,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/accounts', account);
+app.use('/profiles', profile);
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
