@@ -1,0 +1,26 @@
+version: '2.3'
+services:
+    # api
+    server:
+        image: gsg-general:0.1.0
+        environment:
+            - MONGODB_HOST=database
+            - MONGODB_PORT=27017
+        depends_on:
+            - database
+        ports:
+            - "8080:8080"
+        networks:
+            - gsg
+        restart: on-failure
+    database:
+        image: mongo:latest
+        volumes:
+            - /data/mongodb:/data/db
+        ports:
+            - "27017:27017"
+        networks:
+            - gsg
+networks:
+    gsg:
+        driver: bridge
