@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var account = require('./routes/account');
@@ -19,6 +20,8 @@ mongoose.Promise = global.Promise;
 
 // App
 const app = express();
+app.use(cors())
+app.options('*', cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/accounts', account);

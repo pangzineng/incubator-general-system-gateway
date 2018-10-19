@@ -7,4 +7,4 @@ var AccountSchema = new Schema({
 });
 
 // Export the model
-module.exports = mongoose.model('account', AccountSchema);
+module.exports = mongoose.model('account', AccountSchema, 'account');

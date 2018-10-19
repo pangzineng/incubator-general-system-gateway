@@ -7,4 +7,4 @@ var PermissionSchema = new Schema({
 });
 
 // Export the model
-module.exports = mongoose.model('permission', PermissionSchema);
+module.exports = mongoose.model('permission', PermissionSchema, 'permission');

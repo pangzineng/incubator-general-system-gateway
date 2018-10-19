@@ -9,4 +9,4 @@ var ProfileSchema = new Schema({
 });
 
 // Export the model
-module.exports = mongoose.model('profile', ProfileSchema);
+module.exports = mongoose.model('profile', ProfileSchema, 'profile');

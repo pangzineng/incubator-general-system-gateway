@@ -16,9 +16,7 @@ services:
     database:
         image: mongo:latest
         volumes:
-            - /data/mongodb:/data/db
-        ports:
-            - "27017:27017"
+            - /data/mongodb2:/data/db
         networks:
             - gsg
 networks:

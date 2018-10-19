@@ -7,7 +7,8 @@ docker build \
 docker-compose -p gsg-general down &&
 docker-compose -p gsg-general up -d
 
-# inject profile data
-docker exec gsg-general-database_1 mongoimport --db gsg --collection profile --jsonArray --file profiles.json
-# inject sample permission data
-docker exec gsg-general-database_1 mongoimport --db gsg --collection permission --jsonArray --file permissions-sample.json
+# inject profile data & sample permission data
+docker cp profiles.json gsg-general_database_1:/tmp/profiles.json
+docker cp permissions-sample.json gsg-general_database_1:/tmp/permissions-sample.json
+docker exec gsg-general_database_1 mongoimport --db gsg --collection profile --jsonArray --file /tmp/profiles.json
+docker exec gsg-general_database_1 mongoimport --db gsg --collection permission --jsonArray --file /tmp/permissions-sample.json
