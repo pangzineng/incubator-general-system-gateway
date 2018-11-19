@@ -1,15 +1,22 @@
 version: '2.3'
 services:
-    # api
-    server:
+    nginx:
+        image: nginx:latest
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./nginx:/etc/nginx/conf.d
+        depends_on:
+            - api
+        networks:
+            - gsg
+    api:
         image: gsg-general:0.1.0
         environment:
             - MONGODB_HOST=database
             - MONGODB_PORT=27017
         depends_on:
             - database
-        ports:
-            - "8080:8080"
         networks:
             - gsg
         restart: on-failure
