@@ -20,8 +20,7 @@ mongoose.Promise = global.Promise;
 
 // App
 const app = express();
-app.use(cors())
-app.options('*', cors())
+app.use(cors({maxAge: 86400}))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/accounts', account);
