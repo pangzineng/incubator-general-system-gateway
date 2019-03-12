@@ -1,7 +1,7 @@
 #!/bin/bash
 
 docker build \
-    -t gsg-general:0.1.0 ../../server
+    -t gsg-general:0.1.0 ../../
 
 # run locally
 docker-compose -p gsg-general down &&
