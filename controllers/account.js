@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 var Account = require('../models/account');
 var Profile = require('../models/profile');
 var Permission = require('../models/permission');
