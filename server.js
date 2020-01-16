@@ -8,7 +8,11 @@ var account = require('./routes/account');
 var profile = require('./routes/profile');
 
 // Set up mongoose connection
-var mongoURI = `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_HOST || 'localhost'}:${process.env.MONGODB_PORT || '27017'}/gsg?authSource=admin`; 
+if (process.env.MONGODB_USER){
+  var mongoURI = `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_HOST || 'localhost'}:${process.env.MONGODB_PORT || '27017'}/gsg?authSource=admin`; 
+} else {
+  var mongoURI = `mongodb://${process.env.MONGODB_HOST || 'localhost'}:${process.env.MONGODB_PORT || '27017'}/gsg`; 
+}
 mongoose.connect(mongoURI).then((goose) => {
   if (goose) {
     console.log('Connected to MongoDB at', mongoURI)
